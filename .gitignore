@@ -1,3 +1,5 @@
 .env
 node_modules/
 data/
+bootstrap.css
+/helpers/create-slug.js

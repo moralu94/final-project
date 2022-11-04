@@ -1,0 +1,50 @@
+{{>navbar}}
+{{#if empty_field_error}}
+    {{>empty_field_error}}
+{{/if}}
+{{#if wrong_title_error}}
+    {{>wrong_title_error}}
+{{/if}}
+
+<div class="container mt-5">
+    <div class="control is-flex is-flex-direction-column is-align-items-center">
+        <h2 class="is-size-3 my-4 mx-5">Nuevo Post</h2>
+        <form action="/posts" method="POST">
+
+            <div class="box form-box">
+                <div class="control mb-3 mx-5">
+                    <div class="field">
+                        <label for="title" class="label">Título</label>
+                        <div class="control">
+                            <input class="input" id="title" name="title" value="{{title}}" placeholder="Ingrese el título del post" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="body" class="label">Cuerpo</label>
+                        <div class="control">
+                            <textarea class="textarea" id="body" name="body" rows="3" aria-valuetext="{{body}}" placeholder="Ingrese el cuerpo del post" required></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mx-5 is-flex is-justify-content-space-between">
+                    <a href="../posts" class="button is-link is-outlined">
+                        <span class="icon-text">
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                </svg>
+                            </span>
+                            <span>Ir a Todos los Posts</span>
+                        </span>
+                    </a>
+                    
+                    <button class="button is-primary">Enviar</button>
+                    
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

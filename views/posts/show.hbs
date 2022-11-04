@@ -1,0 +1,79 @@
+{{>navbar}}
+{{#if create_post}}
+    {{>create_post}}
+{{/if}}
+
+{{#if post_edited}}
+    {{>post_edited}}
+{{/if}}
+
+
+<div class="container">
+    <h2 class="mt-6 mb-2 mx-5 is-size-3">Post</h2>
+    <div class="card mb-3 mx-5">
+        <div class="card-header p-2 is-flex is-justify-content-space-between">  
+            <a class="author" href="/posts/user/{{post.author}}">@{{ post.author }}</a>
+            <div class="date">{{ post.date }} </div>
+        </div>
+        <p class="card-header-title"> {{ post.title }} </p>
+        <p class="card-content">{{ post.body }}</p>
+        <div class="card-footer p-1">
+            {{#if hasAccess}}
+                <a href="/posts/edit/{{post._id}}" class="button is-info">
+                    <span class="icon-text">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </span>
+                        <span>Editar</span>
+                    </span>
+                </a>
+                <button class="button is-danger" data-bs-toggle="modal" data-bs-target="#modal" id="btn">
+                    <span class="icon-text">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                            </svg>
+                        </span>
+                        <span>Eliminar</span>
+                    </span>
+                </button>
+            {{/if}}
+        </div>
+    </div>
+
+    <a href="../posts" class="button is-link is-outlined mt-4 ml-5">
+        <span class="icon-text">
+            <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </span>
+            <span>Ir a Todos los Posts</span>
+        </span>
+    </a>
+</div>
+{{#if hasAccess}}
+    <div class="modal" id="myModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Estás a punto de borrar este Post</p>
+                <button class="delete" aria-label="close" data-bulma-modal="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <p class="has-text-weight-bold">Desea borrar este Post? No podrás recuperar la información una vez eliminada!</p>
+            </section>
+            <footer class="modal-card-foot is-flex is-justify-content-flex-end">
+                <form action="/posts/{{post._id}}?_method=DELETE" method="POST">
+                    <button class="button is-danger">Eliminar</button>
+                </form>
+                <button class="button is-primary" data-bulma-modal="close">Cancelar</button>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/js/modal.js"></script>
+{{/if}}

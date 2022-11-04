@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const { default: slugify } = require('slugify')
-
+let i = 0
 const postSchema = new mongoose.Schema(
-    {
+    {       
         title: {
             type: String,
             required: true
@@ -11,11 +11,20 @@ const postSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        date: {
+            type: String,
+            required: true
+        },
+        author:{
+            type:String,
+            required: true
+        },
         slug: {
             type: String,
             required: true,
             unique: true
         }
+
     },
     {
         versionKey: false

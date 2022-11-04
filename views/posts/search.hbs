@@ -1,0 +1,28 @@
+{{>navbar}}
+
+<div class="container">
+   <div class="mt-5 mx-5 is-flex is-flex-direction-row is-justify-content-space-between">
+        <h2 class="is-size-3">Resultados de la busqueda: '{{searchQuery}}'</h2>
+        <form action="/posts/search?={{searchInput}}" method="get">  
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" id="search" name="searchInput" type="searchInput" autocomplete="off" placeholder="Buscar Posts por Título" value="">
+                </div>
+                <div class="control">
+                    <button class="button is-info">
+                        <span class="icon">
+                            <ion-icon name="search"></ion-icon>
+                        </span>
+                    </button>
+                </div>
+            </div>    
+        </form> 
+    </div>   
+        {{#if posts}}
+            {{>posts}}  
+
+            {{else}}
+                <h3 class="mt-6 is-size-5 has-text-centered">No se encontró ningún resultado</h3>
+        {{/if}}
+   
+</div>

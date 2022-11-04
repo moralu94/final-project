@@ -1,0 +1,85 @@
+{{>error-signup}}
+
+<div class="container is-flex is-flex-direction-column is-align-items-center">
+	<div class="container box signup px-6">
+	<form action="/auth/signup" method="POST">
+		<h3 class="mb-5 is-size-4 has-text-centered">Crear Cuenta</h3>
+		{{!-- Nombre de Usuario --}}
+		<div class="control mt-4">
+			<label for="userName" class="label">Nombre de Usuario</label>
+			<div class="control has-icons-left">
+				<span class="icon is-small is-left">
+					<ion-icon name="person-outline"></ion-icon>
+				</span>
+				<input 
+					type="text" 
+					class="input" 
+					id="userName" 
+					name="userName" 
+					placeholder="Ingrese su nombre"
+					value={{userName}}
+				>
+			</div>
+		</div>
+
+		{{!-- Correo --}}
+		<div class="control mt-4">
+			<label for="email" class="label">Correo Electrónico</label>
+			<div class="control has-icons-left">
+				<span class="icon is-small is-left">
+					<ion-icon name="mail-outline"></ion-icon>
+				</span>
+				<input 
+					type="email" 
+					class="input" 
+					id="email" 
+					name="email" 
+					placeholder="Ingrese su correo electrónico"
+					value={{email}}
+				>
+			</div>
+		</div>
+
+		{{!-- Password --}}
+		<div class="control mt-4">
+			<label for="password" class="label">Contraseña</label>
+			<div class="control has-icons-left">
+				<div class="icon is-small">
+					<ion-icon name="lock-closed-outline"></ion-icon>
+				</div>
+				<input 
+                    type="password" 
+                    class="input" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Ingrese su contraseña"
+                >
+			</div>
+		</div>
+
+		{{!-- Confirm Password --}}
+		<div class="control mt-4">
+			<label for="confirm_password" class="label">Confirme su Contraseña</label>
+			<div class="control has-icons-left">
+				<div class="icon is-small">
+					<ion-icon name="lock-closed-outline"></ion-icon>
+				</div>
+				<input 
+                    type="password" 
+                    class="input" 
+                    id="confirm_password" 
+                    name="confirm_password" 
+                    placeholder="Confirme su contraseña"
+                >
+			</div>	
+		</div>
+
+		<div class="is-flex is-flex-direction-column is-align-items-center">
+			<button class="button is-rounded is-primary mt-5">
+				Crear Cuenta
+			</button>
+			<p class="mt-4">Ya tienes cuenta? <a href="/auth/signin">Inicia Sesión!</a></p>
+		</div>
+	</form>
+	</div>
+</div>

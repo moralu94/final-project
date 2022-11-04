@@ -1,10 +1,16 @@
-// const app = require('express')()
 const express = require('express')
+const methodOverride = require('method-override')
 const { engine } = require('express-handlebars')
+const session = require('express-session')
+const flash = require('connect-flash')
+const MongoStore = require('connect-mongo')
+const passport = require('passport')
+
 require('dotenv').config()
+require('./config/passport')
 
 const { dbConnection } = require('./database/config')
-const routerIndex = require('./routes')
+const { routerAuth } = require('./routes/auth')
 const { routerDev } = require('./routes/db')
 const { routerPosts } = require('./routes/posts')
 
@@ -23,11 +29,35 @@ app.set('views', './views')
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(methodOverride('_method'))
+app.use(
+    session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+        store: MongoStore.create({mongoUrl: process.env.DB_REMOTA_URI})
+    })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
 
-
+// Middleware para mostrar mensajes
+app.use((req, res, next) => {
+    res.locals.todo_ok = req.flash('todo_ok')
+    res.locals.error_user = req.flash('error_user')
+    res.locals.error_email = req.flash('error_email')
+    res.locals.delete_post = req.flash('delete_post')
+    res.locals.create_post = req.flash('create_post')
+    res.locals.wrong_title_error = req.flash('wrong_title_error')
+    res.locals.post_edited = req.flash('post_edited');
+    
+    res.locals.user = req.user || null
+    next()
+})
 
 // Routes
-app.use('/', routerIndex)
+app.use('/', routerAuth)
 app.use('/', routerDev) // Solo para desarrollo
 app.use('/', routerPosts)
 

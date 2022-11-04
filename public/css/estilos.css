@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;600&display=swap');
+
+*{
+   font-family: 'Nunito', sans-serif !important;
+}
+
+html{
+   min-height: 100vh;
+}
+
+body{
+   background-color: #f0f0f0;
+   min-height: 100vh;
+}
+
+footer{
+   width: 100%;
+   bottom: 0;
+}
+
+/* .is-fluid .card {
+   max-width: 45%;
+   width: 100%;
+} */
+
+.card-header-title{
+   font-size: 1.4em;
+}
+
+.card-content{
+   min-height:5em;
+}
+
+.card-footer{
+   gap: 1em;
+   min-height: 50px;
+   height: fit-content;
+   justify-content: flex-end;
+}
+.modal-card-foot{
+   gap: 1em;
+}
+
+p a{
+   font-weight: 600;
+}
+
+.title-home{
+   font-weight: 600;
+   text-align: center;
+}
+
+h2.line{
+   position: relative;
+   z-index: 1;
+}
+
+h2.line:before {
+   border-top: 2px solid #000000;
+   content: "";
+   margin: 0 auto;
+   position: absolute;
+   top: 50%;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   width: 95%;
+   z-index: -1;
+}
+
+h2.line span {
+   background-color: hsl(171, 100%, 96%);
+   padding: 0 15px;
+}
+
+.gap{
+   gap: 1.3em;
+}
+
+.form-box{
+   width: 40rem;
+}
+
+.container .signup{
+   position: fixed;
+}
+
+.signup {
+   width: 27em ;
+   margin-top: 9rem;
+}
+
+.signin{
+   width: 24em;
+   margin-top: 10rem;
+}
+
+.notification{
+   width: fit-content;
+   text-align: center;
+}
+
+.error-container{
+   height: 2em;
+}
+
+.notification .is-danger, .notification .is-success{
+   position: fixed;
+}

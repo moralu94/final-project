@@ -1,0 +1,13 @@
+<div class="container error-container is-flex is-flex-direction-column is-align-items-center">
+	{{#each errors}}
+		<div class="notification is-danger mt-1">
+			<button class="delete" onclick="this.parentElement.style.display='none'"></button>
+			<span class="icon-text">
+            <span class="icon">
+               <ion-icon name="warning"></ion-icon>
+            </span>
+            <span><strong>{{this.msg}}</strong></span>
+         </span>
+		</div>
+	{{/each}}
+</div>

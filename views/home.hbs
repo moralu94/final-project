@@ -1,0 +1,22 @@
+{{>navbar}}
+
+{{#if user}}
+    <div class="hero is-medium has-background-primary-light py-6">
+        <div class="hero-body is-flex is-flex-direction-column">
+            <h2 class="title-home mb-5 is-size-2">Bienvenid@ de Nuevo {{name}}</h2>
+            <p class="mb-4 has-text-centered is-size-4">No te pierdas de nada. Revisa las últimas novedades!</p>
+            <div class="container is-flex is-flex-direction-column is-justify-content-center">
+                <p class="mb-4 has-text-centered is-size-4">Qué quieres hacer?</p>
+                <div class="is-flex is-justify-content-center gap mb-6 mt-2">
+                    <div class="is-flex-mobile is-flex-direction-column gap">
+                        <a href="/posts/new" class="button is-rounded is-primary">Crear Post</a>
+                        <a href="/posts/user/{{name}}" class="button is-rounded is-primary is-outlined">Mis Posts</a>
+                        <a href="/posts" class="button is-rounded is-primary is-outlined">Todos los Posts</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
+
+{{>footer}}
