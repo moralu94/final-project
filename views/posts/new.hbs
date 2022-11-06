@@ -9,7 +9,7 @@
 <div class="container mt-5">
     <div class="control is-flex is-flex-direction-column is-align-items-center">
         <h2 class="is-size-3 my-4 mx-5">Nuevo Post</h2>
-        <form action="/posts" method="POST">
+        <form action="/posts" method="POST" enctype="multipart/form-data">
 
             <div class="box form-box">
                 <div class="control mb-3 mx-5">
@@ -24,6 +24,18 @@
                         <div class="control">
                             <textarea class="textarea" id="body" name="body" rows="3" aria-valuetext="{{body}}" placeholder="Ingrese el cuerpo del post" required></textarea>
                         </div>
+                    </div>
+                    <div class="file has-name mb-5" id="fileInput">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="image" name="image">
+                            <span class="file-cta">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">Subir Imagen</span>
+                            </span>
+                            <span class="file-name"></span>
+                        </label>
                     </div>
                 </div>
 
@@ -48,3 +60,5 @@
     </div>
 
 </div>
+
+<script src="/js/img-upload.js"></script>

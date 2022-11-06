@@ -6,6 +6,8 @@ const flash = require('connect-flash')
 const MongoStore = require('connect-mongo')
 const passport = require('passport')
 
+const path = require('path');
+
 require('dotenv').config()
 require('./config/passport')
 
@@ -60,6 +62,9 @@ app.use((req, res, next) => {
 app.use('/', routerAuth)
 app.use('/', routerDev) // Solo para desarrollo
 app.use('/', routerPosts)
+
+// static files
+app.use(express.static(path.join(__dirname, 'public/uploads/')));
 
 const PORT = process.env.PORT
 app.listen(PORT, err => {

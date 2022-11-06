@@ -16,8 +16,19 @@ const postSchema = new mongoose.Schema(
             required: true
         },
         author:{
-            type:String,
+            type: String,
             required: true
+        },
+        img:{
+            type: String,
+            required: false
+        },
+        path:{
+            type:String,
+            required:false
+        },
+        hasImg:{
+            type: Boolean
         },
         slug: {
             type: String,

@@ -18,27 +18,8 @@ footer{
    bottom: 0;
 }
 
-/* .is-fluid .card {
-   max-width: 45%;
-   width: 100%;
-} */
-
-.card-header-title{
-   font-size: 1.4em;
-}
-
-.card-content{
-   min-height:5em;
-}
-
-.card-footer{
-   gap: 1em;
-   min-height: 50px;
-   height: fit-content;
-   justify-content: flex-end;
-}
-.modal-card-foot{
-   gap: 1em;
+.card {
+   width: 32rem;
 }
 
 p a{

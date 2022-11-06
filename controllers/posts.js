@@ -1,8 +1,9 @@
 const { DateTime } = require("luxon");
 const { response } = require('express')
-const Post = require('../models/posts') 
-const Auth = require('../models/auth'); 
-/* const isAuthenticated = require("../middlewares/isauthenticated"); */
+const Post = require('../models/posts')
+
+const path = require('path'); 
+const { unlink } = require('fs-extra');
 
 const getMain = (req, res = response) => {
     if (req.isAuthenticated()) res.redirect('/home')
@@ -13,7 +14,7 @@ const getHome = (req, res = response) => {
     res.status(200).render('home', {title: 'Info-Blog', name : req.user.userName})
 }
 
-// mostrar todos los posts - Index
+// VISTA - mostrar todos los posts - Index
 const getPosts = async (req, res) => {
     
    try {
@@ -31,11 +32,11 @@ const getPosts = async (req, res) => {
 
    } catch (error) {
        console.log(error)
-       /* res.status(400) ver desp*/
+       /* res.status(400)*/
    }
 }
 
-// mostrar todos los posts de un usuario especifico
+// VISTA - mostrar todos los posts de un usuario especifico
 const getPostsUser = async (req, res) => {
 
     try {
@@ -58,7 +59,7 @@ const getPostsUser = async (req, res) => {
     }
 }
 
-// mostrar un post (show) - Show
+// VISTA - mostrar un post (show) - Show
 const showPost = async (req, res) => {
     let hasAccess = false
     try {
@@ -68,6 +69,7 @@ const showPost = async (req, res) => {
 
         const user = req.user.userName
         if (post.author == user) hasAccess = true
+        /* console.log(post.path, post.hasImg) */
         
         res.render('posts/show', 
             {
@@ -98,14 +100,14 @@ const editPost = async (req, res) => {
     } 
 }
 
-
-
 // borrar un post - Delete
 const deletePost = async(req, res = response) => {
     
     try {
 
-        await Post.findByIdAndDelete(req.params.id)
+        const deletePost = await Post.findByIdAndDelete(req.params.id)
+        await unlink(path.resolve('./public' + deletePost.path))
+
         res.redirect('/posts')
         //notificacion
         req.flash('delete_post', 'Se ha borrado el post con exito!')
@@ -116,7 +118,7 @@ const deletePost = async(req, res = response) => {
 
 }
 
-// nuevo post - New
+// VISTA - nuevo post - New
 const view_newPost = (req, res = response) => {
     res.status(200).render('posts/new', 
     {
@@ -131,10 +133,22 @@ const createPost = async (req, res = response) => {
     try {
         let post = new Post()
 
-        post.title = req.body.title
-        post.body = req.body.body
-        post.date = DateTime.now().setLocale('es').toFormat('DDD')
-        post.author = req.user.userName
+        if (req.file){
+            post.img = req.file.filename
+            post.path = '/uploads/' + req.file.filename
+            post.hasImg = true
+            post.title = req.body.title
+            post.body = req.body.body
+            post.date = DateTime.now().setLocale('es').toFormat('DDD')
+            post.author = req.user.userName
+        }
+        else {
+            post.hasImg = false
+            post.title = req.body.title
+            post.body = req.body.body
+            post.date = DateTime.now().setLocale('es').toFormat('DDD')
+            post.author = req.user.userName
+        }
 
         post = await post.save()
 
@@ -143,8 +157,8 @@ const createPost = async (req, res = response) => {
         res.status(200).redirect(`/posts/${post.slug}`)
 
     } catch (error) {
-        console.log(error); 
-        /* res.json({msg: error}) */
+        /* console.log(error);  */
+        res.json({msg: error})
         if (error.message == "Post validation failed: slug: Path `slug` is required."){
             req.flash('wrong_title_error', 'Hubo un error generando el titulo, intentalo de nuevo');
             //los slugs son unicos..

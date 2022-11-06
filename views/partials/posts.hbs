@@ -1,26 +1,30 @@
-<div class="container is-fluid m-0 p-0 ">
-        <div class="container m-0 p-0{{!-- is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-space-between --}}">
-            {{#each posts}}
-                <div class="card m-5">
-                    <div class="card-header p-2 is-flex is-justify-content-space-between">  
-                        <a href="/posts/user/{{this.author}}" class="author">@{{ this.author }}</a>                       
-                        <div class="date">{{ this.date }} </div>
+<div class="container mt-6 p-0  is-flex is-flex-direction-column is-align-items-center">
+    <div class="container">
+        {{#each posts}}
+            <div class="card mb-5">
+                {{#if this.hasImg}}
+                    <div class="card-image">
+                        <figure class="image is-1by1">
+                            <a href="/posts/{{this.slug}}"><img src="{{this.path}}"  alt="Placeholder image"></a>
+                        </figure>
                     </div>
-                    <p class="card-header-title">{{this.title}}</p>
-                    <p class="card-content p-1 ml-4">{{this.body}}</p>
-                    <div class="card-footer p-1">
-                        <a href="/posts/{{this.slug}}" class="button is-primary is-outlined">
-                            <span class="icon-text">
-                                <span>Ver Post</span>
-                                <span class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                                    </svg>
-                                </span>
-                            </span>
-                        </a>
+                {{/if}}
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <a href="/posts/{{this.slug}}" class="title is-4"><p>{{this.title}}</p></a>
+                            <a href="/posts/user/{{this.author}}" class="subtitle is-6">@{{this.author}}</a>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <span>{{this.body}}</span>
+                    </div>
+                    <div class="content">
+                        <span>{{this.date}}</span>
                     </div>
                 </div>
-            {{/each}}
-        </div>
+            </div>
+        {{/each}}
     </div>
+</div>
