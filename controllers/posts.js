@@ -32,7 +32,7 @@ const getPosts = async (req, res) => {
 
    } catch (error) {
        console.log(error)
-       /* res.status(400)*/
+       res.json({msg: error})
    }
 }
 
@@ -55,7 +55,7 @@ const getPostsUser = async (req, res) => {
  
     } catch (error) {
         console.log(error)
-        //res.status(400) ver desp
+        res.json({msg: error})
     }
 }
 
@@ -80,8 +80,9 @@ const showPost = async (req, res) => {
             }
         )
 
-    } catch (error) {//rev
+    } catch (error) {//r
         console.log(error);
+        res.json({msg: error})
     }
 }
 
@@ -93,10 +94,11 @@ const editPost = async (req, res) => {
         const editPost = await Post.updateOne({_id: id}, {$set: {title, body}})
         const post = await Post.findById({_id : id}).lean()
         
-        req.flash('post_edited', 'El Post se modificó con éxito!');
+        req.flash('edit_post', 'El Post se modificó con éxito!');
         res.status(200).redirect(`/posts/${post.slug}`)
     } catch (error) {
         console.log(error); //
+        res.json({msg: error})
     } 
 }
 
@@ -106,14 +108,16 @@ const deletePost = async(req, res = response) => {
     try {
 
         const deletePost = await Post.findByIdAndDelete(req.params.id)
-        await unlink(path.resolve('./public' + deletePost.path))
-
+        if (deletePost.hasImg) {
+            await unlink(path.resolve('./public' + deletePost.path))
+        }
+        
+        req.flash('delete_post', 'Se ha borrado el post con éxito!')
         res.redirect('/posts')
-        //notificacion
-        req.flash('delete_post', 'Se ha borrado el post con exito!')
 
     } catch (error) {
         console.log(error); //
+        res.json({msg: error})
     }
 
 }
@@ -158,9 +162,9 @@ const createPost = async (req, res = response) => {
 
     } catch (error) {
         /* console.log(error);  */
-        res.json({msg: error})
-        if (error.message == "Post validation failed: slug: Path `slug` is required."){
-            req.flash('wrong_title_error', 'Hubo un error generando el titulo, intentalo de nuevo');
+        /* res.json({msg: error}) */
+        if ((error.message == "Post validation failed: slug: Path `slug` is required.") || (error.code == '11000')){
+            req.flash('wrong_title_error', 'Hubo un error generando este post, intentalo de nuevo');
             //los slugs son unicos..
         }
         return res.redirect('posts/new')
@@ -182,6 +186,7 @@ const view_editPost = async (req, res) => {
         
     } catch (error) {
         console.log(error); //
+        res.json({msg: error})
     }
     
 }
@@ -204,6 +209,7 @@ const searchPost = async (req, res = response) => {
 
     } catch (error) {
         console.log(error); //
+        res.json({msg: error})
     } 
 }
 

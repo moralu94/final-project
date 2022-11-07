@@ -49,10 +49,10 @@ app.use((req, res, next) => {
     res.locals.todo_ok = req.flash('todo_ok')
     res.locals.error_user = req.flash('error_user')
     res.locals.error_email = req.flash('error_email')
-    res.locals.delete_post = req.flash('delete_post')
     res.locals.create_post = req.flash('create_post')
+    res.locals.delete_post = req.flash('delete_post')
+    res.locals.edit_post = req.flash('edit_post');
     res.locals.wrong_title_error = req.flash('wrong_title_error')
-    res.locals.post_edited = req.flash('post_edited');
     
     res.locals.user = req.user || null
     next()

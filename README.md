@@ -40,6 +40,8 @@ También podes ver los posts de otros usuarios (haciendo click en su título ó 
 
 >[dotenv](https://www.npmjs.com/package/dotenv)
 
+>[fs-extra](https://www.npmjs.com/package/fs-extra)
+
 >[luxon](https://www.npmjs.com/package/luxon)
 
 >[Mongoose](https://www.npmjs.com/package/mongoose)
