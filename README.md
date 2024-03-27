@@ -1,6 +1,6 @@
 # Proyecto Final - Node.JS Digitalers
 
-## [Live Preview](https://final-project-production-3600.up.railway.app/)
+## [Live Preview](https://final-project-8lrl.onrender.com/)
 ----------------------
 ## ¿En que consiste este proyecto?
 Este proyecto es el proyecto final del curso Node.JS [Digitalers de Telecom](https://www.digitalers.com.ar/index.html#sobre-digitalers). 
@@ -11,7 +11,7 @@ El blog fue armado con [Bulma](https://bulma.io/) en el frontend. Bulma es un fr
 
 Este blog requiere que crees una cuenta, no es necesario que introduzcas un email válido o una contraseña súper segura, la misma se hashea con 'bcrypt'. 
 
-Una vez creada la cuenta puedes iniciar sesión y crear ó ver posts. Cuando crees un post podrás incluir o no una imagen. Los posteos se guardan en una base Mongo, junto con los usuarios.
+Una vez creada la cuenta puedes iniciar sesión y crear ó ver posts. Cuando crees un post podrás incluir o no una imagen. Los posteos se guardan en una base Mongo, junto con los usuarios y las sesiones.
 
 Sí creaste un post luego podrás eliminar o editar el post que te pertenece.
 También podes ver los posts de otros usuarios (haciendo click en su título ó en su imagen si posee una) ó los posts de un usuario específico (haciendo click en su nombre de usuario).
